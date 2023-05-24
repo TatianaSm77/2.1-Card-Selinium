@@ -113,6 +113,19 @@ public class CallBackTest {
     }
 
     @Test
+    void shouldCardFormInvalidPhoneWithPlus() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("8+7999888774");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.className("button")).click();
+
+        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
+        String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText().trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void shouldCardFormWithoutName() {
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887744");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -147,5 +160,6 @@ public class CallBackTest {
 
         assertEquals(expected, actual);
     }
+
 
 }
