@@ -23,3 +23,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+task buildProject(type: Exec) {
+    commandLine 'your-build-command-here'
+}
+
+build.dependsOn buildProject
